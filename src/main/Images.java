@@ -44,6 +44,10 @@ public class Images {
             case 11 -> {
                 return new ImageIcon(new ImageIcon("pictures/pixel empty.png").getImage().getScaledInstance(width,height,Image.SCALE_SMOOTH));
             }
+            case 12 -> {
+                return new ImageIcon(new ImageIcon("pictures/pixel unrevealed.png").getImage().getScaledInstance(width,height,Image.SCALE_SMOOTH));
+            }
+
             default -> {
                 return null;
             }

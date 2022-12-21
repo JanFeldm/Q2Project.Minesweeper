@@ -6,12 +6,14 @@ import java.util.*;
 
 public class Minefield {
 
+    private MyPanel[][] mineField;
     private Random rand = new Random();
     public Minefield(MyPanel[][] mineField){
 
+        this.mineField = mineField;
         for(int i = 0;i<=mineField.length-1;i++){
             for(int j = 0;j<=mineField[i].length-1;j++){
-                int randNumber = rand.nextInt(5);
+                int randNumber = rand.nextInt(7);
                 if(1 ==randNumber){
                     mineField[i][j].setMine(true);
 
@@ -33,10 +35,6 @@ public class Minefield {
                 }
             }
         }
-
-
-
-
-
     }
+
 }
