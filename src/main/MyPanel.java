@@ -3,25 +3,18 @@ package main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class MyPanel extends JPanel implements MouseListener {
 
-    JLabel label;
-
-    private ImageIcon image1;
-    private ImageIcon image2;
-    private ImageIcon image3;
-    private ImageIcon image4;
-    private ImageIcon image5;
-    private ImageIcon image6;
-    private ImageIcon image7;
-    private ImageIcon image8;
-    private ImageIcon imageMine;
+    private JLabel label;
 
     private boolean mine;
     private int mineCount;
+    private int imageState;
+
 
     private Images images = new Images();
 
@@ -45,6 +38,7 @@ public class MyPanel extends JPanel implements MouseListener {
     public boolean isMine(){
         return mine;
     }
+
     public void setMineCount(int mineCount){
         this.mineCount = mineCount;
     }
@@ -52,22 +46,54 @@ public class MyPanel extends JPanel implements MouseListener {
         return mineCount;
     }
 
+    public void setImageState(int imageState){
+        this.imageState = imageState;
+    }
+    public int getImageState(){
+        return imageState;
+    }
+
 
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        if(isMine()) {
-            label.setIcon(images.getIMage(9,getWidth(),getHeight()));
-        }else{
-            switch(mineCount){
-                case 1 ->{label.setIcon(images.getIMage(1,getWidth(),getHeight()));}
-                case 2 ->{label.setIcon(images.getIMage(2,getWidth(),getHeight()));}
-                case 3 ->{label.setIcon(images.getIMage(3,getWidth(),getHeight()));}
-                case 4 ->{label.setIcon(images.getIMage(4,getWidth(),getHeight()));}
-                case 5 ->{label.setIcon(images.getIMage(5,getWidth(),getHeight()));}
-                case 6 ->{label.setIcon(images.getIMage(6,getWidth(),getHeight()));}
-                case 7 ->{label.setIcon(images.getIMage(7,getWidth(),getHeight()));}
-                case 8 ->{label.setIcon(images.getIMage(8,getWidth(),getHeight()));}
+
+        if(e.getButton() == MouseEvent.BUTTON1) {
+            if (isMine()) {
+                System.out.println("Game Over");
+            } else {
+                switch (mineCount) {
+                    case 1 -> {
+                        label.setIcon(images.getIMage(1, getWidth(), getHeight()));
+                    }
+                    case 2 -> {
+                        label.setIcon(images.getIMage(2, getWidth(), getHeight()));
+                    }
+                    case 3 -> {
+                        label.setIcon(images.getIMage(3, getWidth(), getHeight()));
+                    }
+                    case 4 -> {
+                        label.setIcon(images.getIMage(4, getWidth(), getHeight()));
+                    }
+                    case 5 -> {
+                        label.setIcon(images.getIMage(5, getWidth(), getHeight()));
+                    }
+                    case 6 -> {
+                        label.setIcon(images.getIMage(6, getWidth(), getHeight()));
+                    }
+                    case 7 -> {
+                        label.setIcon(images.getIMage(7, getWidth(), getHeight()));
+                    }
+                    case 8 -> {
+                        label.setIcon(images.getIMage(8, getWidth(), getHeight()));
+                    }
+                }
+            }
+        }else if(e.getButton() == MouseEvent.BUTTON3){
+            if(getImageState() == 1){
+                label.setIcon(new ImageIcon());
+            }else {
+                label.setIcon(images.getIMage(9, getWidth(), getHeight()));
             }
         }
     }
