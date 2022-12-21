@@ -23,14 +23,13 @@ public class MyPanel extends JPanel implements MouseListener {
     public MyPanel(int x,int y){
         super();
         this.setLayout(new GridBagLayout());
-
         label = new JLabel();
         add(label);
 
 
 
         addMouseListener(this);
-        this.setBackground(Color.white);
+        this.setBackground(Color.gray);
 
     }
     public void setMine(boolean mine){
@@ -124,11 +123,11 @@ public class MyPanel extends JPanel implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
 
-        this.setBackground(Color.BLUE);
+        this.setBackground(Color.lightGray);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        this.setBackground(Color.white);
+        this.setBackground(Color.gray);
     }
 }
