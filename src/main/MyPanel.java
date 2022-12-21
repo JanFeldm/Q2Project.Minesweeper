@@ -14,6 +14,7 @@ public class MyPanel extends JPanel implements MouseListener {
     private boolean mine;
     private int mineCount;
     private int imageState;
+    private boolean revealed;
 
 
     private Images images = new Images();
@@ -53,6 +54,13 @@ public class MyPanel extends JPanel implements MouseListener {
         return imageState;
     }
 
+    public void setRevealed(boolean revealed){
+        this.revealed =revealed;
+    }
+    public boolean isRevealed(){
+        return revealed;
+    }
+
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -60,7 +68,7 @@ public class MyPanel extends JPanel implements MouseListener {
 
         if(e.getButton() == MouseEvent.BUTTON1) {
             if (isMine()) {
-                System.out.println("Game Over");
+                label.setIcon(images.getIMage(10, getWidth(), getHeight()));
             } else {
                 switch (mineCount) {
                     case 1 -> {
@@ -89,11 +97,16 @@ public class MyPanel extends JPanel implements MouseListener {
                     }
                 }
             }
+            setRevealed(true);
         }else if(e.getButton() == MouseEvent.BUTTON3){
-            if(getImageState() == 1){
-                label.setIcon(new ImageIcon());
-            }else {
-                label.setIcon(images.getIMage(9, getWidth(), getHeight()));
+            if(!isRevealed()) {
+                if (getImageState() == 1) {
+                    label.setIcon(images.getIMage(11, getWidth(), getHeight()));
+                    setImageState(0);
+                } else {
+                    label.setIcon(images.getIMage(9, getWidth(), getHeight()));
+                    setImageState(1);
+                }
             }
         }
     }

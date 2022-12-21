@@ -38,6 +38,12 @@ public class Images {
             case 9 -> {
                 return new ImageIcon(new ImageIcon("pictures/pixel mine.png").getImage().getScaledInstance(width,height,Image.SCALE_SMOOTH));
             }
+            case 10 -> {
+                return new ImageIcon(new ImageIcon("pictures/pixel bomb.png").getImage().getScaledInstance(width,height,Image.SCALE_SMOOTH));
+            }
+            case 11 -> {
+                return new ImageIcon(new ImageIcon("pictures/pixel empty.png").getImage().getScaledInstance(width,height,Image.SCALE_SMOOTH));
+            }
             default -> {
                 return null;
             }
