@@ -23,6 +23,7 @@ public class MyPanel extends JPanel implements MouseListener {
     private boolean mine;
     private int mineCount;
 
+    private Images images = new Images();
 
 
     public MyPanel(int x,int y){
@@ -56,17 +57,17 @@ public class MyPanel extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         if(isMine()) {
-            label.setIcon(imageMine);
+            label.setIcon(images.getIMage(9,getWidth(),getHeight()));
         }else{
             switch(mineCount){
-                case 1 ->{label.setIcon(image1);}
-                case 2 ->{label.setIcon(image2);}
-                case 3 ->{label.setIcon(image3);}
-                case 4 ->{label.setIcon(image4);}
-                case 5 ->{label.setIcon(image5);}
-                case 6 ->{label.setIcon(image6);}
-                case 7 ->{label.setIcon(image7);}
-                case 8 ->{label.setIcon(image8);}
+                case 1 ->{label.setIcon(images.getIMage(1,getWidth(),getHeight()));}
+                case 2 ->{label.setIcon(images.getIMage(2,getWidth(),getHeight()));}
+                case 3 ->{label.setIcon(images.getIMage(3,getWidth(),getHeight()));}
+                case 4 ->{label.setIcon(images.getIMage(4,getWidth(),getHeight()));}
+                case 5 ->{label.setIcon(images.getIMage(5,getWidth(),getHeight()));}
+                case 6 ->{label.setIcon(images.getIMage(6,getWidth(),getHeight()));}
+                case 7 ->{label.setIcon(images.getIMage(7,getWidth(),getHeight()));}
+                case 8 ->{label.setIcon(images.getIMage(8,getWidth(),getHeight()));}
             }
         }
     }
@@ -83,18 +84,6 @@ public class MyPanel extends JPanel implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
-
-
-        image1 = new ImageIcon(new ImageIcon("pictures/pixel 1.png").getImage().getScaledInstance(getWidth(),getHeight(),Image.SCALE_SMOOTH));
-        image2 = new ImageIcon(new ImageIcon("pictures/pixel 2.png").getImage().getScaledInstance(getWidth(),getHeight(),Image.SCALE_SMOOTH));
-        image3 = new ImageIcon(new ImageIcon("pictures/pixel 3.png").getImage().getScaledInstance(getWidth(),getHeight(),Image.SCALE_SMOOTH));
-        image4 = new ImageIcon(new ImageIcon("pictures/pixel 4.png").getImage().getScaledInstance(getWidth(),getHeight(),Image.SCALE_SMOOTH));
-        image5 = new ImageIcon(new ImageIcon("pictures/pixel 5.png").getImage().getScaledInstance(getWidth(),getHeight(),Image.SCALE_SMOOTH));
-        image6 = new ImageIcon(new ImageIcon("pictures/pixel 6.png").getImage().getScaledInstance(getWidth(),getHeight(),Image.SCALE_SMOOTH));
-        image7 = new ImageIcon(new ImageIcon("pictures/pixel 7.png").getImage().getScaledInstance(getWidth(),getHeight(),Image.SCALE_SMOOTH));
-        image8 = new ImageIcon(new ImageIcon("pictures/pixel 8.png").getImage().getScaledInstance(getWidth(),getHeight(),Image.SCALE_SMOOTH));
-        imageMine = new ImageIcon(new ImageIcon("pictures/pixel mine.png").getImage().getScaledInstance(getWidth(),getHeight(),Image.SCALE_SMOOTH));
 
         this.setBackground(Color.BLUE);
     }

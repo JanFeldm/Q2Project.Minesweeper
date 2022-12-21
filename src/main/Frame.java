@@ -26,7 +26,7 @@ public class Frame {
         frame.add(mainPanel);
 
         JButton resetButton = new JButton();
-        resetButton.setText("Reset");
+        resetButton.setText("reset");
 
         JPanel topPanel = new JPanel();
         topPanel.setBackground(Color.BLACK);
