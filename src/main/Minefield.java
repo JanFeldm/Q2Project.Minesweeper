@@ -23,16 +23,35 @@ public class Minefield {
                                 if (!(k == i && l == j)) {
                                     mineField[k][l].setMineCount(mineField[k][l].getMineCount() + 1);
                                 }
+
                             }catch(ArrayIndexOutOfBoundsException ignored){};
                         }
                     }
 
                 }else{
                     mineField[i][j].setMine(false);
-
-
-
                 }
+
+                if(i<=mineField.length-2) {
+                    mineField[i][j].setNextPanels(0, mineField[i+1][j]);
+                }
+
+                if(i>0) {
+                    mineField[i][j].setNextPanels(2, mineField[i-1][j]);
+                }
+
+                if(j<=mineField[i].length-2) {
+                    mineField[i][j].setNextPanels(1, mineField[i][j+1]);
+                }
+
+                if(j>0) {
+                    mineField[i][j].setNextPanels(3, mineField[i][j-1]);
+                }
+
+
+
+
+
             }
         }
     }

@@ -2,15 +2,18 @@ package main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Frame {
+public class Frame{
 
     private int gameSize = 9;
     private MyPanel[][] fields = new MyPanel[gameSize][gameSize];
+    private JFrame frame;
     public Frame(){
 
 
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
         frame.setSize(500,600);
@@ -25,14 +28,22 @@ public class Frame {
 
         frame.add(mainPanel);
 
-        JButton resetButton = new JButton();
-        resetButton.setText("reset");
+
 
         JPanel topPanel = new JPanel();
         topPanel.setBackground(Color.BLACK);
         mainPanel.add(topPanel,BorderLayout.PAGE_START);
 
+        JButton resetButton = new JButton();
+        resetButton.setText("reset");
         topPanel.add(resetButton);
+        resetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                Frame newFrame = new Frame();
+            }
+        });
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setBackground(Color.BLACK);
@@ -68,4 +79,5 @@ public class Frame {
     public MyPanel getFieldAt(int x,int y){
         return fields[x][y];
     }
+
 }
