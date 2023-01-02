@@ -13,8 +13,9 @@ public class MyPanel extends JPanel implements MouseListener {
 
     private boolean mine;
     private int mineCount;
-    private int imageState;
+    private int imageState; //marked mine
     private boolean revealed;
+    private boolean gameOver;
 
     private int x;
     private int y;
@@ -85,27 +86,28 @@ public class MyPanel extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
 
-        if (e.getButton() == MouseEvent.BUTTON1) {
-            if (getImageState() != 1) {
-                if (isMine()) {
-                    label.setIcon(images.getIMage(10, getWidth(), getHeight()));
-                } else {
-                    switchLabel(mineCount);
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                if (getImageState() != 1) {
+                    if (isMine()) {
+                        label.setIcon(images.getIMage(10, getWidth(), getHeight()));
+                    } else {
+                        switchLabel(mineCount);
+                    }
+                    setRevealed(true);
                 }
-                setRevealed(true);
+
+            } else if (e.getButton() == MouseEvent.BUTTON3) {
+                if (!isRevealed()) {
+                    if (getImageState() == 1) {
+                        label.setIcon(images.getIMage(12, getWidth(), getHeight()));
+                        setImageState(0);
+                    } else {
+                        label.setIcon(images.getIMage(9, getWidth(), getHeight()));
+                        setImageState(1);
+                    }
+                }
             }
 
-        } else if (e.getButton() == MouseEvent.BUTTON3) {
-            if (!isRevealed()) {
-                if (getImageState() == 1) {
-                    label.setIcon(images.getIMage(12, getWidth(), getHeight()));
-                    setImageState(0);
-                } else {
-                    label.setIcon(images.getIMage(9, getWidth(), getHeight()));
-                    setImageState(1);
-                }
-            }
-        }
     }
 
     @Override
@@ -174,5 +176,14 @@ public class MyPanel extends JPanel implements MouseListener {
                 label.setIcon(images.getIMage(8, getWidth(), getHeight()));
             }
         }
+    }
+
+    public void gameOverWindow(){
+        JFrame gameOverFrame = new JFrame();
+        JLabel gameOverLabel = new JLabel("Game Over");
+        gameOverFrame.add(gameOverLabel);
+        gameOverFrame.setVisible(true);
+        gameOverFrame.setLocationRelativeTo(null);
+        gameOverFrame.setSize(500,600);
     }
 }
