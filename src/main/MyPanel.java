@@ -24,11 +24,13 @@ public class MyPanel extends JPanel implements MouseListener {
 
 
     private Images images = new Images();
+    private Frame mainFrame;
 
 
-    public MyPanel(int x, int y) {
+    public MyPanel(int x, int y, Frame mainFrame) {
         super();
 
+        this.mainFrame = mainFrame;
         this.x = x;
         this.y = y;
 
@@ -40,6 +42,14 @@ public class MyPanel extends JPanel implements MouseListener {
         addMouseListener(this);
         this.setBackground(Color.gray);
 
+    }
+
+    public JLabel getLabel() {
+        return label;
+    }
+
+    public void setLabel(JLabel label) {
+        this.label = label;
     }
 
     public void setMine(boolean mine) {
@@ -82,14 +92,33 @@ public class MyPanel extends JPanel implements MouseListener {
         nextPanels[direction] = nextPanel;
     }
 
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
-
+        if (!gameOver) {
             if (e.getButton() == MouseEvent.BUTTON1) {
                 if (getImageState() != 1) {
                     if (isMine()) {
                         label.setIcon(images.getIMage(10, getWidth(), getHeight()));
+                        gameOver = true;
+
+
+                        revealBombs();
+                        JFrame gameOverF = new JFrame("game Over");
+                        gameOverF.setVisible(true);
+                        gameOverF.setSize(new Dimension(100, 50));
+                        JLabel l = new JLabel("Game over");
+                        gameOverF.add(l);
+                        gameOverF.setLocationRelativeTo(null);
+
                     } else {
                         switchLabel(mineCount);
                     }
@@ -107,6 +136,9 @@ public class MyPanel extends JPanel implements MouseListener {
                     }
                 }
             }
+            checkForVictory();
+        }
+
 
     }
 
@@ -178,12 +210,45 @@ public class MyPanel extends JPanel implements MouseListener {
         }
     }
 
-    public void gameOverWindow(){
-        JFrame gameOverFrame = new JFrame();
-        JLabel gameOverLabel = new JLabel("Game Over");
-        gameOverFrame.add(gameOverLabel);
-        gameOverFrame.setVisible(true);
-        gameOverFrame.setLocationRelativeTo(null);
-        gameOverFrame.setSize(500,600);
+    public void revealBombs() {
+        MyPanel[][] p = mainFrame.getFields();
+        for (int i = 0; i <= p.length - 1; i++) {
+            for (int j = 0; j <= p[i].length - 1; j++) {
+                if (p[i][j].isMine()) {
+                    p[i][j].getLabel().setIcon(images.getIMage(10, p[i][j].getWidth(), p[i][j].getHeight()));
+
+                }
+                p[i][j].setGameOver(true);
+            }
+        }
+
     }
+
+    public void checkForVictory() {
+        MyPanel[][] p = mainFrame.getFields();
+        boolean victory = true;
+        for (int i = 0; i <= p.length - 1; i++) {
+            for (int j = 0; j <= p[i].length - 1; j++) {
+                if((!p[i][j].isRevealed())){
+                    if(p[i][j].isMine() && p[i][j].getImageState() == 1){
+
+                    }else{
+                        victory = false;
+                    }
+                }
+
+            }
+        }
+
+        if(victory){
+            revealBombs();
+            JFrame f = new JFrame("Victory");
+            f.setVisible(true);
+            f.setSize(new Dimension(100, 50));
+            JLabel l = new JLabel("Victory");
+            f.add(l);
+            f.setLocationRelativeTo(null);
+        }
+    }
+
 }

@@ -4,19 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Frame{
 
-    private int gameSize = 9;
+    private int gameSize = 5;
     private MyPanel[][] fields = new MyPanel[gameSize][gameSize];
     private JFrame frame;
     public Frame(){
 
 
-        frame = new JFrame();
+        frame = new JFrame("Mine Sweeper");
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
-        frame.setSize(500,600);
+        frame.setSize(600,600);
         frame.setResizable(true);
         frame.setMinimumSize(new Dimension(550,600));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -60,7 +62,7 @@ public class Frame{
         for(int i = 0; i <= gameSize-1;i++){
 
             for(int j = 0; j <= gameSize-1;j++){
-                fields[i][j] = new MyPanel(i,j);
+                fields[i][j] = new MyPanel(i,j,this);
                 mineField.add(fields[i][j]);
             }
         }
@@ -72,6 +74,18 @@ public class Frame{
 
     }
 
+    public boolean isGameOver() {
+        boolean isGameOver = false;
+        for (MyPanel[] xFields : fields) {
+            for (MyPanel yField : xFields) {
+                if(yField.isGameOver()) {
+                    isGameOver = true;
+                }
+            }
+        }
+        return isGameOver;
+    }
+
     public MyPanel[][] getFields (){
         return fields;
     }
@@ -79,5 +93,6 @@ public class Frame{
     public MyPanel getFieldAt(int x,int y){
         return fields[x][y];
     }
+
 
 }
