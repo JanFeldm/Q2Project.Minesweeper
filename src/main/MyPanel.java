@@ -111,7 +111,7 @@ public class MyPanel extends JPanel implements MouseListener {
                         gameOver = true;
 
 
-                        revealBombs();
+                        revealBombs(true);
                         JFrame gameOverF = new JFrame("game Over");
                         gameOverF.setVisible(true);
                         gameOverF.setSize(new Dimension(100, 50));
@@ -124,6 +124,7 @@ public class MyPanel extends JPanel implements MouseListener {
                     }
                     setRevealed(true);
                 }
+
 
             } else if (e.getButton() == MouseEvent.BUTTON3) {
                 if (!isRevealed()) {
@@ -210,7 +211,7 @@ public class MyPanel extends JPanel implements MouseListener {
         }
     }
 
-    public void revealBombs() {
+    public void revealBombs(boolean boom) {
         MyPanel[][] p = mainFrame.getFields();
         for (int i = 0; i <= p.length - 1; i++) {
             for (int j = 0; j <= p[i].length - 1; j++) {
@@ -241,7 +242,7 @@ public class MyPanel extends JPanel implements MouseListener {
         }
 
         if(victory){
-            revealBombs();
+            revealBombs(false);
             JFrame f = new JFrame("Victory");
             f.setVisible(true);
             f.setSize(new Dimension(100, 50));
