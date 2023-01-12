@@ -7,28 +7,27 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class Frame{
+public class Frame extends JFrame{
 
-    private int gameSize = 5;
+    private int gameSize = 9; // size of the minefield (gameSize x gameSize)
     private MyPanel[][] fields = new MyPanel[gameSize][gameSize];
     private JFrame frame;
-    public Frame(){
+    public Frame(String name){
 
-
-        frame = new JFrame("Mine Sweeper");
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
-        frame.setSize(600,600);
-        frame.setResizable(true);
-        frame.setMinimumSize(new Dimension(550,600));
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        super(name);
+        setVisible(true);
+        setLocationRelativeTo(null);
+        setSize(600,600);
+        setResizable(true);
+        setMinimumSize(new Dimension(550,600));
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(Color.BLACK);
 
 
 
-        frame.add(mainPanel);
+        add(mainPanel);
 
 
 
@@ -42,8 +41,8 @@ public class Frame{
         resetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                Frame newFrame = new Frame();
+                dispose();
+                Frame newFrame = new Frame("Mine Sweeper");
             }
         });
 
@@ -68,7 +67,7 @@ public class Frame{
         }
         Minefield mines = new Minefield(fields);
 
-        frame.setVisible(true);
+        setVisible(true);
 
 
 

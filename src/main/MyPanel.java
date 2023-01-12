@@ -112,12 +112,16 @@ public class MyPanel extends JPanel implements MouseListener {
 
 
                         revealBombs(true);
+                        mainFrame.setTitle("Mine Sweeper  ####Game Over####");
+                        /*
                         JFrame gameOverF = new JFrame("game Over");
                         gameOverF.setVisible(true);
                         gameOverF.setSize(new Dimension(100, 50));
                         JLabel l = new JLabel("Game over");
                         gameOverF.add(l);
                         gameOverF.setLocationRelativeTo(null);
+
+                         */
 
                     } else {
                         switchLabel(mineCount);
@@ -216,7 +220,11 @@ public class MyPanel extends JPanel implements MouseListener {
         for (int i = 0; i <= p.length - 1; i++) {
             for (int j = 0; j <= p[i].length - 1; j++) {
                 if (p[i][j].isMine()) {
-                    p[i][j].getLabel().setIcon(images.getIMage(10, p[i][j].getWidth(), p[i][j].getHeight()));
+                    if(!boom) {
+                        p[i][j].getLabel().setIcon(images.getIMage(10, p[i][j].getWidth(), p[i][j].getHeight()));
+                    }else{
+                        p[i][j].getLabel().setIcon(images.getIMage(13, p[i][j].getWidth(), p[i][j].getHeight()));
+                    }
 
                 }
                 p[i][j].setGameOver(true);
@@ -243,12 +251,16 @@ public class MyPanel extends JPanel implements MouseListener {
 
         if(victory){
             revealBombs(false);
+            mainFrame.setTitle("Mine Sweeper  ****Victory****");
+            /*
             JFrame f = new JFrame("Victory");
             f.setVisible(true);
             f.setSize(new Dimension(100, 50));
             JLabel l = new JLabel("Victory");
             f.add(l);
             f.setLocationRelativeTo(null);
+
+             */
         }
     }
 
