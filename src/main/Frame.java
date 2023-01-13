@@ -9,18 +9,20 @@ import java.awt.event.MouseListener;
 
 public class Frame extends JFrame{
 
-    private int gameSize = 9; // size of the minefield (gameSize x gameSize)
+    private int gameSize = 15; // size of the minefield (gameSize x gameSize)
     private MyPanel[][] fields = new MyPanel[gameSize][gameSize];
     private JFrame frame;
     public Frame(String name){
 
         super(name);
-        setVisible(true);
-        setLocationRelativeTo(null);
+
+        Dimension screenSize = Toolkit. getDefaultToolkit(). getScreenSize();
         setSize(600,600);
+        setLocation(screenSize.width/2 - getWidth()/2 ,screenSize.height/2 -getHeight()/2);
         setResizable(true);
         setMinimumSize(new Dimension(550,600));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setVisible(true);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(Color.BLACK);
@@ -47,7 +49,7 @@ public class Frame extends JFrame{
         });
 
         JPanel bottomPanel = new JPanel();
-        bottomPanel.setBackground(Color.BLACK);
+        bottomPanel.setBackground(Color.darkGray);
         mainPanel.add(bottomPanel,BorderLayout.PAGE_END);
 
         JPanel mineField = new JPanel(new GridLayout(gameSize,gameSize,50/gameSize,50/gameSize));
