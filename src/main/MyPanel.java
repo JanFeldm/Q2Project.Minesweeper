@@ -220,9 +220,9 @@ public class MyPanel extends JPanel implements MouseListener {
         for (int i = 0; i <= p.length - 1; i++) {
             for (int j = 0; j <= p[i].length - 1; j++) {
                 if (p[i][j].isMine()) {
-                    if(!boom) {
+                    if (!boom) {
                         p[i][j].getLabel().setIcon(images.getIMage(10, p[i][j].getWidth(), p[i][j].getHeight()));
-                    }else{
+                    } else {
                         p[i][j].getLabel().setIcon(images.getIMage(13, p[i][j].getWidth(), p[i][j].getHeight()));
                     }
 
@@ -238,10 +238,10 @@ public class MyPanel extends JPanel implements MouseListener {
         boolean victory = true;
         for (int i = 0; i <= p.length - 1; i++) {
             for (int j = 0; j <= p[i].length - 1; j++) {
-                if((!p[i][j].isRevealed())){
-                    if(p[i][j].isMine() && p[i][j].getImageState() == 1){
+                if ((!p[i][j].isRevealed())) {
+                    if (p[i][j].isMine() && p[i][j].getImageState() == 1) {
 
-                    }else{
+                    } else {
                         victory = false;
                     }
                 }
@@ -249,7 +249,7 @@ public class MyPanel extends JPanel implements MouseListener {
             }
         }
 
-        if(victory){
+        if (victory) {
             revealBombs(false);
             mainFrame.setTitle("Mine Sweeper  ****Victory****");
             /*
