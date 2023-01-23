@@ -82,7 +82,7 @@ public class StartMenu extends JFrame implements ActionListener {
             difficultyHard.setBackground(Color.WHITE);
         }
         if (e.getSource() == difficultyHard) {
-            difficulty = 50;
+            difficulty = 25;
             difficultyLow.setBackground(Color.WHITE);
             difficultyMid.setBackground(Color.WHITE);
             difficultyHard.setBackground(Color.gray);

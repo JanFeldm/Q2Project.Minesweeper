@@ -20,10 +20,10 @@ public class Frame extends JFrame {
         this.gameSize = gameSize;
         fields = new MyPanel[gameSize][gameSize];
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setSize(600, 600);
+        setSize(900, 900);
         setLocation(screenSize.width / 2 - getWidth() / 2, screenSize.height / 2 - getHeight() / 2);
         setResizable(true);
-        setMinimumSize(new Dimension(550, 600));
+        setMinimumSize(new Dimension(850, 900));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
@@ -51,11 +51,12 @@ public class Frame extends JFrame {
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setBackground(Color.darkGray);
-        mainPanel.add(bottomPanel, BorderLayout.PAGE_END);
+        mainPanel.add(bottomPanel, BorderLayout.CENTER);
 
         JPanel mineField = new JPanel(new GridLayout(gameSize, gameSize, 50 / gameSize, 50 / gameSize));
-        mineField.setPreferredSize(new Dimension(500, 500));
+        mineField.setPreferredSize(new Dimension(800, 800));
         mineField.setBackground(Color.BLACK);
+
 
         bottomPanel.add(mineField);
 
