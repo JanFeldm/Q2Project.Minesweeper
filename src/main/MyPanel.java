@@ -12,15 +12,15 @@ public class MyPanel extends JPanel implements MouseListener {
     private JLabel label;
 
     private boolean mine;
-    private int mineCount;
-    private int imageState; //marked mine
-    private boolean revealed;
+    private int mineCount; //mines in the surrounding area
+    private int imageState; //marked mine with right mouse click
+    private boolean revealed; //got revealed with left mouse click
     private boolean gameOver;
 
     private int x;
     private int y;
 
-    private MyPanel[] nextPanels = new MyPanel[4];
+    private MyPanel[] nextPanels = new MyPanel[8]; //Panels in surrounding Area
 
 
     private Images images = new Images();
@@ -104,7 +104,7 @@ public class MyPanel extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         if (!gameOver) {
-            if (e.getButton() == MouseEvent.BUTTON1) {
+            if (e.getButton() == MouseEvent.BUTTON1) { //right click
                 if (getImageState() != 1) {
                     if (isMine()) {
                         label.setIcon(images.getIMage(10, getWidth(), getHeight()));
@@ -113,15 +113,6 @@ public class MyPanel extends JPanel implements MouseListener {
 
                         revealBombs(true);
                         mainFrame.setTitle("Mine Sweeper  ####Game Over####");
-                        /*
-                        JFrame gameOverF = new JFrame("game Over");
-                        gameOverF.setVisible(true);
-                        gameOverF.setSize(new Dimension(100, 50));
-                        JLabel l = new JLabel("Game over");
-                        gameOverF.add(l);
-                        gameOverF.setLocationRelativeTo(null);
-
-                         */
 
                     } else {
                         switchLabel(mineCount);
@@ -130,12 +121,12 @@ public class MyPanel extends JPanel implements MouseListener {
                 }
 
 
-            } else if (e.getButton() == MouseEvent.BUTTON3) {
+            } else if (e.getButton() == MouseEvent.BUTTON3) { //left click
                 if (!isRevealed()) {
-                    if (getImageState() == 1) {
+                    if (getImageState() == 1) { // if marked with mine
                         label.setIcon(images.getIMage(12, getWidth(), getHeight()));
                         setImageState(0);
-                    } else {
+                    } else { //if field is unrevealed and not marked with mine
                         label.setIcon(images.getIMage(9, getWidth(), getHeight()));
                         setImageState(1);
                     }
@@ -168,7 +159,7 @@ public class MyPanel extends JPanel implements MouseListener {
     }
 
     public void revealArea() {
-        if (getMineCount() == 0) {
+        if (getMineCount() == 0) { //reveals the clicked fields and the fields next to it if its empty
             label.setIcon(images.getIMage(11, getWidth(), getHeight()));
             setRevealed(true);
             for (int i = 0; i <= nextPanels.length - 1; i++) {

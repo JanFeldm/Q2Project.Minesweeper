@@ -31,11 +31,11 @@ public class StartMenu extends JFrame implements ActionListener {
         mainPanel.setLayout(borderLayout);
         add(mainPanel);
         JPanel upperPanel = new JPanel();
-        GridLayout gridLayout = new GridLayout(1,3);
+        GridLayout gridLayout = new GridLayout(1, 3);
         upperPanel.setLayout(gridLayout);
-        JPanel lowerPanel = new JPanel(new GridLayout(1,1));
+        JPanel lowerPanel = new JPanel(new GridLayout(1, 1));
 
-        difficultyLow = new JButton("Low");
+        difficultyLow = new JButton("Easy");
         difficultyLow.addActionListener(this);
         difficultyLow.setBackground(Color.WHITE);
 
@@ -56,14 +56,12 @@ public class StartMenu extends JFrame implements ActionListener {
         upperPanel.add(difficultyHard);
 
         lowerPanel.add(startButton);
-        JLabel label = new JLabel("Select Difficulty",SwingConstants.CENTER);
+        JLabel label = new JLabel("Select Difficulty", SwingConstants.CENTER);
         label.setBackground(Color.WHITE);
 
-        mainPanel.add(label,BorderLayout.PAGE_START);
-        mainPanel.add(upperPanel,BorderLayout.CENTER);
-        mainPanel.add(lowerPanel,BorderLayout.PAGE_END);
-
-
+        mainPanel.add(label, BorderLayout.PAGE_START);
+        mainPanel.add(upperPanel, BorderLayout.CENTER);
+        mainPanel.add(lowerPanel, BorderLayout.PAGE_END);
 
 
     }
@@ -71,27 +69,27 @@ public class StartMenu extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == difficultyLow){
+        if (e.getSource() == difficultyLow) {
             difficulty = 9;
             difficultyLow.setBackground(Color.gray);
             difficultyMid.setBackground(Color.WHITE);
             difficultyHard.setBackground(Color.WHITE);
         }
-        if(e.getSource() == difficultyMid){
+        if (e.getSource() == difficultyMid) {
             difficulty = 16;
             difficultyLow.setBackground(Color.WHITE);
             difficultyMid.setBackground(Color.gray);
             difficultyHard.setBackground(Color.WHITE);
         }
-        if(e.getSource() == difficultyHard){
-            difficulty = 24;
+        if (e.getSource() == difficultyHard) {
+            difficulty = 50;
             difficultyLow.setBackground(Color.WHITE);
             difficultyMid.setBackground(Color.WHITE);
             difficultyHard.setBackground(Color.gray);
         }
-        if(e.getSource() == startButton){
+        if (e.getSource() == startButton) {
             this.dispose();
-            Frame frame = new Frame("Mine Sweeper",difficulty); //creating the game frame
+            Frame frame = new Frame("Mine Sweeper", difficulty); //creating the game frame
         }
 
     }
