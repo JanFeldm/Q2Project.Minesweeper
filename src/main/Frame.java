@@ -39,7 +39,12 @@ public class Frame extends JFrame {
         mainPanel.add(topPanel, BorderLayout.PAGE_START);
 
         JButton resetButton = new JButton();
-        resetButton.setText("reset");
+        resetButton.setText("RESET");
+        resetButton.setBackground(Color.DARK_GRAY);
+        resetButton.setPreferredSize(new Dimension(200,30));
+        resetButton.setFont(new Font("Stencil",Font.PLAIN,30));
+        resetButton.setFocusPainted(false);
+        resetButton.setForeground(Color.WHITE);
         topPanel.add(resetButton);
         resetButton.addActionListener(new ActionListener() {
             @Override
@@ -50,7 +55,7 @@ public class Frame extends JFrame {
         });
 
         JPanel bottomPanel = new JPanel();
-        bottomPanel.setBackground(Color.darkGray);
+        bottomPanel.setBackground(Color.BLACK);
         mainPanel.add(bottomPanel, BorderLayout.CENTER);
 
         JPanel mineField = new JPanel(new GridLayout(gameSize, gameSize, 50 / gameSize, 50 / gameSize));

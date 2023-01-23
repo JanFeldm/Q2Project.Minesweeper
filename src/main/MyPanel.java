@@ -40,7 +40,7 @@ public class MyPanel extends JPanel implements MouseListener {
 
 
         addMouseListener(this);
-        this.setBackground(Color.gray);
+        this.setBackground(Color.DARK_GRAY);
 
     }
 
@@ -124,7 +124,7 @@ public class MyPanel extends JPanel implements MouseListener {
             } else if (e.getButton() == MouseEvent.BUTTON3) { //left click
                 if (!isRevealed()) {
                     if (getImageState() == 1) { // if marked with mine
-                        label.setIcon(images.getIMage(12, getWidth(), getHeight()));
+                        label.setIcon(null);
                         setImageState(0);
                     } else { //if field is unrevealed and not marked with mine
                         label.setIcon(images.getIMage(9, getWidth(), getHeight()));
@@ -150,12 +150,12 @@ public class MyPanel extends JPanel implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        this.setBackground(Color.lightGray);
+        this.setBackground(Color.gray);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        this.setBackground(Color.gray);
+        this.setBackground(Color.DARK_GRAY);
     }
 
     public void revealArea() {
@@ -176,33 +176,33 @@ public class MyPanel extends JPanel implements MouseListener {
 
     public void switchLabel(int z) {
         switch (z) {
-            case 0 -> {
+            case 0 :
                 revealArea();
-            }
-            case 1 -> {
+                break;
+            case 1 :
                 label.setIcon(images.getIMage(1, getWidth(), getHeight()));
-            }
-            case 2 -> {
+                break;
+            case 2 :
                 label.setIcon(images.getIMage(2, getWidth(), getHeight()));
-            }
-            case 3 -> {
+                break;
+            case 3 :
                 label.setIcon(images.getIMage(3, getWidth(), getHeight()));
-            }
-            case 4 -> {
+                break;
+            case 4 :
                 label.setIcon(images.getIMage(4, getWidth(), getHeight()));
-            }
-            case 5 -> {
+                break;
+            case 5 :
                 label.setIcon(images.getIMage(5, getWidth(), getHeight()));
-            }
-            case 6 -> {
+                break;
+            case 6 :
                 label.setIcon(images.getIMage(6, getWidth(), getHeight()));
-            }
-            case 7 -> {
+                break;
+            case 7 :
                 label.setIcon(images.getIMage(7, getWidth(), getHeight()));
-            }
-            case 8 -> {
+                break;
+            case 8 :
                 label.setIcon(images.getIMage(8, getWidth(), getHeight()));
-            }
+                break;
         }
     }
 
@@ -214,7 +214,7 @@ public class MyPanel extends JPanel implements MouseListener {
                     if (!boom) {
                         p[i][j].getLabel().setIcon(images.getIMage(10, p[i][j].getWidth(), p[i][j].getHeight()));
                     } else {
-                        p[i][j].getLabel().setIcon(images.getIMage(13, p[i][j].getWidth(), p[i][j].getHeight()));
+                        p[i][j].getLabel().setIcon(images.getIMage(12, p[i][j].getWidth(), p[i][j].getHeight()));
                     }
 
                 }
@@ -243,15 +243,6 @@ public class MyPanel extends JPanel implements MouseListener {
         if (victory) {
             revealBombs(false);
             mainFrame.setTitle("Mine Sweeper  ****Victory****");
-            /*
-            JFrame f = new JFrame("Victory");
-            f.setVisible(true);
-            f.setSize(new Dimension(100, 50));
-            JLabel l = new JLabel("Victory");
-            f.add(l);
-            f.setLocationRelativeTo(null);
-
-             */
         }
     }
 

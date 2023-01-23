@@ -35,21 +35,37 @@ public class StartMenu extends JFrame implements ActionListener {
         upperPanel.setLayout(gridLayout);
         JPanel lowerPanel = new JPanel(new GridLayout(1, 1));
 
-        difficultyLow = new JButton("Easy");
+        difficultyLow = new JButton("Easy (9x9)");
+        difficultyLow.setFont(new Font("Stencil",Font.PLAIN,20));
+        difficultyLow.setFocusPainted(false);
+        difficultyLow.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
         difficultyLow.addActionListener(this);
         difficultyLow.setBackground(Color.WHITE);
+        difficultyLow.setForeground(Color.BLACK);
 
-        difficultyMid = new JButton("Medium");
+        difficultyMid = new JButton("Medium (16x16)");
+        difficultyMid.setFont(new Font("Stencil",Font.PLAIN,20));
+        difficultyMid.setFocusPainted(false);
+        difficultyMid.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
         difficultyMid.addActionListener(this);
         difficultyMid.setBackground(Color.WHITE);
+        difficultyMid.setForeground(Color.BLACK);
 
-        difficultyHard = new JButton("Hard");
+        difficultyHard = new JButton("Hard (25x25)");
+        difficultyHard.setFont(new Font("Stencil",Font.PLAIN,20));
+        difficultyHard.setFocusPainted(false);
+        difficultyHard.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
         difficultyHard.addActionListener(this);
         difficultyHard.setBackground(Color.WHITE);
+        difficultyHard.setForeground(Color.BLACK);
 
         startButton = new JButton("Start");
+        startButton.setFont(new Font("Stencil",Font.PLAIN,30));
+        startButton.setFocusPainted(false);
+        startButton.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
         startButton.addActionListener(this);
         startButton.setBackground(Color.WHITE);
+        startButton.setForeground(Color.BLACK);
 
         upperPanel.add(difficultyLow);
         upperPanel.add(difficultyMid);
@@ -57,11 +73,14 @@ public class StartMenu extends JFrame implements ActionListener {
 
         lowerPanel.add(startButton);
         JLabel label = new JLabel("Select Difficulty", SwingConstants.CENTER);
-        label.setBackground(Color.WHITE);
+        label.setFont(new Font("Stencil",Font.PLAIN,20));
+        label.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
+        label.setForeground(Color.BLACK);
 
         mainPanel.add(label, BorderLayout.PAGE_START);
         mainPanel.add(upperPanel, BorderLayout.CENTER);
         mainPanel.add(lowerPanel, BorderLayout.PAGE_END);
+        mainPanel.setBackground(Color.WHITE);
 
 
     }
@@ -71,21 +90,30 @@ public class StartMenu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == difficultyLow) {
             difficulty = 9;
-            difficultyLow.setBackground(Color.gray);
+            difficultyLow.setBackground(Color.DARK_GRAY);
+            difficultyLow.setForeground(Color.WHITE);
             difficultyMid.setBackground(Color.WHITE);
+            difficultyMid.setForeground(Color.BLACK);
             difficultyHard.setBackground(Color.WHITE);
+            difficultyHard.setForeground(Color.BLACK);
         }
         if (e.getSource() == difficultyMid) {
             difficulty = 16;
             difficultyLow.setBackground(Color.WHITE);
-            difficultyMid.setBackground(Color.gray);
+            difficultyLow.setForeground(Color.BLACK);
+            difficultyMid.setBackground(Color.DARK_GRAY);
+            difficultyMid.setForeground(Color.WHITE);
             difficultyHard.setBackground(Color.WHITE);
+            difficultyHard.setForeground(Color.BLACK);
         }
         if (e.getSource() == difficultyHard) {
             difficulty = 25;
             difficultyLow.setBackground(Color.WHITE);
+            difficultyLow.setForeground(Color.BLACK);
             difficultyMid.setBackground(Color.WHITE);
-            difficultyHard.setBackground(Color.gray);
+            difficultyMid.setForeground(Color.BLACK);
+            difficultyHard.setBackground(Color.DARK_GRAY);
+            difficultyHard.setForeground(Color.WHITE);
         }
         if (e.getSource() == startButton) {
             this.dispose();
