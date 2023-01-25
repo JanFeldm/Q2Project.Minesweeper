@@ -24,7 +24,9 @@ public class Frame extends JFrame {
         this.gameSize = gameSize;
         fields = new MyPanel[gameSize][gameSize];
         //minefield
-        mineField = new JPanel(new GridLayout(gameSize, gameSize, 50 / gameSize, 50 / gameSize));
+        GridLayout gridLayout = new GridLayout(gameSize, gameSize, 1+50 / gameSize, 1+50 / gameSize);
+        mineField = new JPanel(gridLayout);
+
         mineField.setPreferredSize(new Dimension(800, 800));
         mineField.setBackground(Color.BLACK);
 

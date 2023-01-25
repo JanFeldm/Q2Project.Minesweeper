@@ -46,7 +46,7 @@ public class Images {
                 return new ImageIcon(getImageIcon("pictures/pixel empty.png",this).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
 
             case 12 :
-                return new ImageIcon(getImageIcon("pictures/pixel boom.png",this).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
+                return new ImageIcon(getImageIcon("pictures/pixel boom 2.png",this).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
 
 
             default :
