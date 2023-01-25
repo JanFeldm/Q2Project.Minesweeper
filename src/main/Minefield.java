@@ -8,6 +8,7 @@ public class Minefield {
 
     private MyPanel[][] mineField;
     private Random rand = new Random();
+    private int allMines = 0;
 
     public Minefield(MyPanel[][] mineField) {
 
@@ -17,6 +18,7 @@ public class Minefield {
                 int randNumber = rand.nextInt(7); // mine with 1/7 chance
                 if (1 == randNumber) {
                     mineField[i][j].setMine(true); // places mine on field
+                    allMines++;
 
                     for (int k = i - 1; k <= i + 1; k++) {
                         for (int l = j - 1; l <= j + 1; l++) {
@@ -72,6 +74,10 @@ public class Minefield {
 
             }
         }
+    }
+
+    public int getallMines(){
+        return allMines;
     }
 
 }

@@ -7,11 +7,12 @@ import java.awt.event.ActionListener;
 
 public class StartMenu extends JFrame implements ActionListener {
 
-    private int difficulty = 1;
+    private int difficulty = 9;
     private JButton difficultyLow;
     private JButton difficultyMid;
     private JButton difficultyHard;
     private JButton startButton;
+    private int secretModeCounter = 0;
 
     public StartMenu() {
         createPanel();
@@ -66,6 +67,7 @@ public class StartMenu extends JFrame implements ActionListener {
         startButton.addActionListener(this);
         startButton.setBackground(Color.WHITE);
         startButton.setForeground(Color.BLACK);
+        startButton.setEnabled(false);
 
         upperPanel.add(difficultyLow);
         upperPanel.add(difficultyMid);
@@ -89,6 +91,7 @@ public class StartMenu extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == difficultyLow) {
+            secretModeCounter = 0;
             difficulty = 9;
             difficultyLow.setBackground(Color.DARK_GRAY);
             difficultyLow.setForeground(Color.WHITE);
@@ -96,8 +99,10 @@ public class StartMenu extends JFrame implements ActionListener {
             difficultyMid.setForeground(Color.BLACK);
             difficultyHard.setBackground(Color.WHITE);
             difficultyHard.setForeground(Color.BLACK);
+            startButton.setEnabled(true);
         }
         if (e.getSource() == difficultyMid) {
+            secretModeCounter = 0;
             difficulty = 16;
             difficultyLow.setBackground(Color.WHITE);
             difficultyLow.setForeground(Color.BLACK);
@@ -105,8 +110,14 @@ public class StartMenu extends JFrame implements ActionListener {
             difficultyMid.setForeground(Color.WHITE);
             difficultyHard.setBackground(Color.WHITE);
             difficultyHard.setForeground(Color.BLACK);
+            startButton.setEnabled(true);
         }
         if (e.getSource() == difficultyHard) {
+            secretModeCounter++;
+            if(secretModeCounter == 10){
+                this.dispose();
+                Frame frame = new Frame("SECRET MODE",100);
+            }
             difficulty = 25;
             difficultyLow.setBackground(Color.WHITE);
             difficultyLow.setForeground(Color.BLACK);
@@ -114,6 +125,7 @@ public class StartMenu extends JFrame implements ActionListener {
             difficultyMid.setForeground(Color.BLACK);
             difficultyHard.setBackground(Color.DARK_GRAY);
             difficultyHard.setForeground(Color.WHITE);
+            startButton.setEnabled(true);
         }
         if (e.getSource() == startButton) {
             this.dispose();

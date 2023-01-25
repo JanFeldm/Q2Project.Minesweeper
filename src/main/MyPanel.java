@@ -126,9 +126,11 @@ public class MyPanel extends JPanel implements MouseListener {
                     if (getImageState() == 1) { // if marked with mine
                         label.setIcon(null);
                         setImageState(0);
+                        mainFrame.setAllMines(mainFrame.getAllMines()+1);
                     } else { //if field is unrevealed and not marked with mine
                         label.setIcon(images.getIMage(9, getWidth(), getHeight()));
                         setImageState(1);
+                        mainFrame.setAllMines(mainFrame.getAllMines()-1);
                     }
                 }
             }

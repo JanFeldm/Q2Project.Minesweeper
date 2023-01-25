@@ -12,6 +12,10 @@ public class Frame extends JFrame {
     private int gameSize; // size of the minefield (gameSize x gameSize)
     private MyPanel[][] fields;
     private JFrame frame;
+    private Minefield mines;
+    private int allMines;
+    private JPanel mineField;
+    private JLabel mineLabel;
 
     public Frame(String name,int gameSize) {
 
@@ -19,6 +23,14 @@ public class Frame extends JFrame {
 
         this.gameSize = gameSize;
         fields = new MyPanel[gameSize][gameSize];
+        //minefield
+        mineField = new JPanel(new GridLayout(gameSize, gameSize, 50 / gameSize, 50 / gameSize));
+        mineField.setPreferredSize(new Dimension(800, 800));
+        mineField.setBackground(Color.BLACK);
+
+        createPanels();
+        allMines = mines.getallMines();
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setSize(900, 900);
         setLocation(screenSize.width / 2 - getWidth() / 2, screenSize.height / 2 - getHeight() / 2);
@@ -38,10 +50,12 @@ public class Frame extends JFrame {
         topPanel.setBackground(Color.BLACK);
         mainPanel.add(topPanel, BorderLayout.PAGE_START);
 
+        //reset button
+
         JButton resetButton = new JButton();
         resetButton.setText("RESET");
         resetButton.setBackground(Color.DARK_GRAY);
-        resetButton.setPreferredSize(new Dimension(200,30));
+        resetButton.setPreferredSize(new Dimension(300,30));
         resetButton.setFont(new Font("Stencil",Font.PLAIN,30));
         resetButton.setFocusPainted(false);
         resetButton.setForeground(Color.WHITE);
@@ -54,18 +68,46 @@ public class Frame extends JFrame {
             }
         });
 
+        mineLabel = new JLabel(" "+allMines+" ",SwingConstants.CENTER);
+        mineLabel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY,3));
+        mineLabel.setBackground(Color.DARK_GRAY);
+        mineLabel.setPreferredSize(new Dimension(200,30));
+        mineLabel.setFont(new Font("Stencil",Font.PLAIN,30));
+        mineLabel.setForeground(Color.WHITE);
+        topPanel.add(mineLabel);
+
+        //choose difficulty button
+
+        JButton chooseDifficulty = new JButton("DIFFICULTY");
+        chooseDifficulty.setBackground(Color.DARK_GRAY);
+        chooseDifficulty.setPreferredSize(new Dimension(300,30));
+        chooseDifficulty.setFont(new Font("Stencil",Font.PLAIN,30));
+        chooseDifficulty.setFocusPainted(false);
+        chooseDifficulty.setForeground(Color.WHITE);
+        topPanel.add(chooseDifficulty);
+        chooseDifficulty.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                StartMenu startMenu = new StartMenu();
+            }
+        });
+
+        //bottom Panel
         JPanel bottomPanel = new JPanel();
         bottomPanel.setBackground(Color.BLACK);
         mainPanel.add(bottomPanel, BorderLayout.CENTER);
-
-        JPanel mineField = new JPanel(new GridLayout(gameSize, gameSize, 50 / gameSize, 50 / gameSize));
-        mineField.setPreferredSize(new Dimension(800, 800));
-        mineField.setBackground(Color.BLACK);
-
-
         bottomPanel.add(mineField);
 
 
+        setVisible(true);
+
+
+
+
+    }
+
+    private void createPanels(){
         for (int i = 0; i <= gameSize - 1; i++) {
 
             for (int j = 0; j <= gameSize - 1; j++) {
@@ -73,13 +115,18 @@ public class Frame extends JFrame {
                 mineField.add(fields[i][j]);
             }
         }
-        Minefield mines = new Minefield(fields);
-
-        setVisible(true);
-
-
+        mines = new Minefield(fields);
     }
 
+    public void setAllMines(int allMines){
+        this.allMines = allMines;
+        String t = Integer.toString(allMines);
+        mineLabel.setText(t);
+    }
+
+    public int getAllMines() {
+        return allMines;
+    }
 
     public MyPanel[][] getFields() {
         return fields;
