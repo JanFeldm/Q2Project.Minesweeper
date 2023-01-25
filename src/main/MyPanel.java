@@ -16,6 +16,7 @@ public class MyPanel extends JPanel implements MouseListener {
     private int imageState; //marked mine with right mouse click
     private boolean revealed; //got revealed with left mouse click
     private boolean gameOver;
+    private int currentImageCode;
 
     private int x;
     private int y;
@@ -108,6 +109,7 @@ public class MyPanel extends JPanel implements MouseListener {
                 if (getImageState() != 1) {
                     if (isMine()) {
                         label.setIcon(images.getIMage(10, getWidth(), getHeight()));
+                        currentImageCode = 10;
                         gameOver = true;
 
 
@@ -129,6 +131,7 @@ public class MyPanel extends JPanel implements MouseListener {
                         mainFrame.setAllMines(mainFrame.getAllMines()+1);
                     } else { //if field is unrevealed and not marked with mine
                         label.setIcon(images.getIMage(9, getWidth(), getHeight()));
+                        currentImageCode = 9;
                         setImageState(1);
                         mainFrame.setAllMines(mainFrame.getAllMines()-1);
                     }
@@ -163,6 +166,7 @@ public class MyPanel extends JPanel implements MouseListener {
     public void revealArea() {
         if (getMineCount() == 0) { //reveals the clicked fields and the fields next to it if its empty
             label.setIcon(images.getIMage(11, getWidth(), getHeight()));
+            currentImageCode = 11;
             setRevealed(true);
             for (int i = 0; i <= nextPanels.length - 1; i++) {
                 if (nextPanels[i] != null && !nextPanels[i].isRevealed()) {
@@ -183,27 +187,35 @@ public class MyPanel extends JPanel implements MouseListener {
                 break;
             case 1 :
                 label.setIcon(images.getIMage(1, getWidth(), getHeight()));
+                currentImageCode = 1;
                 break;
             case 2 :
                 label.setIcon(images.getIMage(2, getWidth(), getHeight()));
+                currentImageCode = 2;
                 break;
             case 3 :
                 label.setIcon(images.getIMage(3, getWidth(), getHeight()));
+                currentImageCode = 3;
                 break;
             case 4 :
                 label.setIcon(images.getIMage(4, getWidth(), getHeight()));
+                currentImageCode = 4;
                 break;
             case 5 :
                 label.setIcon(images.getIMage(5, getWidth(), getHeight()));
+                currentImageCode = 5;
                 break;
             case 6 :
                 label.setIcon(images.getIMage(6, getWidth(), getHeight()));
+                currentImageCode = 6;
                 break;
             case 7 :
                 label.setIcon(images.getIMage(7, getWidth(), getHeight()));
+                currentImageCode = 7;
                 break;
             case 8 :
                 label.setIcon(images.getIMage(8, getWidth(), getHeight()));
+                currentImageCode = 8;
                 break;
         }
     }
@@ -215,8 +227,10 @@ public class MyPanel extends JPanel implements MouseListener {
                 if (p[i][j].isMine()) {
                     if (!boom) {
                         p[i][j].getLabel().setIcon(images.getIMage(10, p[i][j].getWidth(), p[i][j].getHeight()));
+                        currentImageCode = 10;
                     } else {
                         p[i][j].getLabel().setIcon(images.getIMage(12, p[i][j].getWidth(), p[i][j].getHeight()));
+                        currentImageCode = 12;
                     }
 
                 }
@@ -245,6 +259,14 @@ public class MyPanel extends JPanel implements MouseListener {
         if (victory) {
             revealBombs(false);
             mainFrame.setTitle("Mine Sweeper  ****Victory****");
+        }
+    }
+
+    public void refreshImage(){
+        if(!isRevealed() && imageState == 0){
+            label.setIcon(null);
+        }else{
+            label.setIcon(images.getIMage(currentImageCode,getWidth(),getHeight()));
         }
     }
 

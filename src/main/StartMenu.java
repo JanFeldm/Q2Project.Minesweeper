@@ -116,7 +116,8 @@ public class StartMenu extends JFrame implements ActionListener {
             secretModeCounter++;
             if(secretModeCounter == 10){
                 this.dispose();
-                Frame frame = new Frame("SECRET MODE",100);
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                Frame frame = new Frame("SECRET MODE",100,new Dimension(900,900),screenSize.width / 2 - 900 / 2, screenSize.height / 2 - 900 / 2);
             }
             difficulty = 25;
             difficultyLow.setBackground(Color.WHITE);
@@ -129,7 +130,8 @@ public class StartMenu extends JFrame implements ActionListener {
         }
         if (e.getSource() == startButton) {
             this.dispose();
-            Frame frame = new Frame("Mine Sweeper", difficulty); //creating the game frame
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            Frame frame = new Frame("Mine Sweeper", difficulty,new Dimension(900,900),screenSize.width / 2 - 900 / 2, screenSize.height / 2 - 900 / 2); //creating the game frame
         }
 
     }
