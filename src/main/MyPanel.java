@@ -263,9 +263,7 @@ public class MyPanel extends JPanel implements MouseListener {
     }
 
     public void refreshImage(){
-        if(!isRevealed() && imageState == 0){
-            label.setIcon(null);
-        }else{
+        if(!(!isRevealed() && imageState == 0)){
             label.setIcon(images.getIMage(currentImageCode,getWidth(),getHeight()));
         }
     }

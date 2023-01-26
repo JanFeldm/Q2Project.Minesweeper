@@ -26,6 +26,11 @@ public class Frame extends JFrame{
     public Frame(String name,int gameSize,Dimension size,int x,int y) {
 
         super(name);
+        setSize(size);
+        setLocation(x,y);
+        setResizable(true);
+        setMinimumSize(new Dimension(400, 400));
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         this.gameSize = gameSize;
         fields = new MyPanel[gameSize][gameSize];
@@ -33,18 +38,11 @@ public class Frame extends JFrame{
         //minefield
         gridLayout = new GridLayout(gameSize, gameSize, 1+50 / gameSize, 1+50 / gameSize);
         mineField = new JPanel(gridLayout);
-        mineField.setPreferredSize(new Dimension(800, 800));
+        mineField.setPreferredSize(new Dimension(getHeight()-100, getHeight()-100));
         mineField.setBackground(Color.BLACK);
-
 
         createPanels();
         allMines = mines.getallMines();
-        setSize(size);
-        setLocation(x,y);
-        setResizable(true);
-        setMinimumSize(new Dimension(850, 900));
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
 
         topPanel = new JPanel();
         topPanel.setBackground(Color.BLACK);
@@ -60,7 +58,11 @@ public class Frame extends JFrame{
         resetButton = new JButton();
         resetButton.setText("RESET");
         resetButton.setBackground(Color.DARK_GRAY);
-        resetButton.setPreferredSize(new Dimension(300,30));
+        if(getWidth()>getHeight()){
+            resetButton.setPreferredSize(new Dimension((getHeight()-100)/3-5,30));
+        }else{
+            resetButton.setPreferredSize(new Dimension((getWidth()-100)/3-5,30));
+        }
         resetButton.setFont(new Font("Stencil",Font.PLAIN,30));
         resetButton.setFocusPainted(false);
         resetButton.setForeground(Color.WHITE);
@@ -70,6 +72,7 @@ public class Frame extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 Frame frame = new Frame("Mine Sweeper",gameSize,getSize(),getX(),getY());
+
             }
         });
 
@@ -77,7 +80,11 @@ public class Frame extends JFrame{
         mineLabel = new JLabel(" "+allMines+" ",SwingConstants.CENTER);
         mineLabel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY,3));
         mineLabel.setBackground(Color.DARK_GRAY);
-        mineLabel.setPreferredSize(new Dimension(200,30));
+        if(getWidth()>getHeight()){
+            mineLabel.setPreferredSize(new Dimension((getHeight()-100)/3-5,30));
+        }else{
+            mineLabel.setPreferredSize(new Dimension((getWidth()-100)/3-5,30));
+        }
         mineLabel.setFont(new Font("Stencil",Font.PLAIN,30));
         mineLabel.setForeground(Color.WHITE);
         topPanel.add(mineLabel);
@@ -87,7 +94,11 @@ public class Frame extends JFrame{
 
         chooseDifficulty = new JButton("DIFFICULTY");
         chooseDifficulty.setBackground(Color.DARK_GRAY);
-        chooseDifficulty.setPreferredSize(new Dimension(300,30));
+        if(getWidth()>getHeight()){
+            chooseDifficulty.setPreferredSize(new Dimension((getHeight()-100)/3-5,30));
+        }else{
+            chooseDifficulty.setPreferredSize(new Dimension((getWidth()-100)/3-5,30));
+        }
         chooseDifficulty.setFont(new Font("Stencil",Font.PLAIN,30));
         chooseDifficulty.setFocusPainted(false);
         chooseDifficulty.setForeground(Color.WHITE);
@@ -110,7 +121,27 @@ public class Frame extends JFrame{
             @Override
             public void componentResized(ComponentEvent e) {
                 super.componentResized(e);
-                mineField.setPreferredSize(new Dimension(getHeight()-100, getHeight()-100));
+                if(getWidth()>getHeight()){
+                    mineField.setPreferredSize(new Dimension(getHeight()-100, getHeight()-100));
+                    resetButton.setPreferredSize(new Dimension((getHeight()-100)/3-5, resetButton.getHeight()));
+                    mineLabel.setPreferredSize(new Dimension((getHeight()-100)/3-5,mineLabel.getHeight()));
+                    chooseDifficulty.setPreferredSize(new Dimension((getHeight()-100)/3-5,chooseDifficulty.getHeight()));
+                }else{
+                    mineField.setPreferredSize(new Dimension(getWidth()-100, getWidth()-100));
+
+                    resetButton.setPreferredSize(new Dimension((getWidth()-100)/3-5, resetButton.getHeight()));
+                    mineLabel.setPreferredSize(new Dimension((getWidth()-100)/3-5,mineLabel.getHeight()));
+                    chooseDifficulty.setPreferredSize(new Dimension((getWidth()-100)/3-5,chooseDifficulty.getHeight()));
+                }
+
+                if(getHeight()%4 == 0 || getWidth()%4 == 0) {
+                    for (int i = 0; i <= gameSize - 1; i++) {
+
+                        for (int j = 0; j <= gameSize - 1; j++) {
+                            fields[i][j].refreshImage();
+                        }
+                    }
+                }
             }
 
         });
@@ -118,10 +149,31 @@ public class Frame extends JFrame{
             @Override
             public void windowStateChanged(WindowEvent e) {
                 super.windowStateChanged(e);
-                mineField.setPreferredSize(new Dimension(getHeight()-100, getHeight()-100));
+                if(getWidth()>getHeight()){
+                    mineField.setPreferredSize(new Dimension(getHeight()-100, getHeight()-100));
+                    resetButton.setPreferredSize(new Dimension((getHeight()-100)/3-5, resetButton.getHeight()));
+                    mineLabel.setPreferredSize(new Dimension((getHeight()-100)/3-5,mineLabel.getHeight()));
+                    chooseDifficulty.setPreferredSize(new Dimension((getHeight()-100)/3-5,chooseDifficulty.getHeight()));
+                }else{
+                    mineField.setPreferredSize(new Dimension(getWidth()-100, getWidth()-100));
+
+                    resetButton.setPreferredSize(new Dimension((getWidth()-100)/3-5, resetButton.getHeight()));
+                    mineLabel.setPreferredSize(new Dimension((getWidth()-100)/3-5,mineLabel.getHeight()));
+                    chooseDifficulty.setPreferredSize(new Dimension((getWidth()-100)/3-5,chooseDifficulty.getHeight()));
+                }
+
+                if(getHeight()%4 == 0 || getWidth()%4 == 0) {
+                    for (int i = 0; i <= gameSize - 1; i++) {
+
+                        for (int j = 0; j <= gameSize - 1; j++) {
+                            fields[i][j].refreshImage();
+                        }
+                    }
+                }
             }
         });
 
+        setVisible(true);
 
     }
 
