@@ -101,6 +101,10 @@ public class MyPanel extends JPanel implements MouseListener {
         this.gameOver = gameOver;
     }
 
+    public void setCurrentImageCode(int currentImageCode){
+        this.currentImageCode = currentImageCode;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -226,11 +230,11 @@ public class MyPanel extends JPanel implements MouseListener {
             for (int j = 0; j <= p[i].length - 1; j++) {
                 if (p[i][j].isMine()) {
                     if (!boom) {
+                        p[i][j].setCurrentImageCode(10);
                         p[i][j].getLabel().setIcon(images.getIMage(10, p[i][j].getWidth(), p[i][j].getHeight()));
-                        currentImageCode = 10;
                     } else {
+                        p[i][j].setCurrentImageCode(12);
                         p[i][j].getLabel().setIcon(images.getIMage(12, p[i][j].getWidth(), p[i][j].getHeight()));
-                        currentImageCode = 12;
                     }
 
                 }
